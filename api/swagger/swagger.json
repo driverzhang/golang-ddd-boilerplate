@@ -1,0 +1,267 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "示例服务",
+        "title": "示例服务(mid-oauth2-srv)",
+        "contact": {},
+        "license": {},
+        "version": "1.0"
+    },
+    "host": "mk-dev.dustess.com",
+    "basePath": "/",
+    "paths": {
+        "/account/api/basic/source/v1": {
+            "get": {
+                "description": "获取账户基础创建方式",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "账户基础信息"
+                ],
+                "summary": "获取账户基础创建方式",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "认证信息 eg:xxxx-xxxx-xxxx-xxx",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功",
+                        "schema": {
+                            "$ref": "#/definitions/contant.SuccessRes"
+                        }
+                    },
+                    "400": {
+                        "description": "参数解析错误",
+                        "schema": {
+                            "$ref": "#/definitions/contant.FailedRes"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/contant.FailedRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/account/api/unauthorized/basic/source/v1": {
+            "get": {
+                "description": "获取账户基础创建方式-无auth",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "账户基础信息"
+                ],
+                "summary": "获取账户基础创建方式-无auth",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "公司corpId",
+                        "name": "corpId",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功",
+                        "schema": {
+                            "$ref": "#/definitions/contant.SuccessRes"
+                        }
+                    },
+                    "400": {
+                        "description": "参数解析错误",
+                        "schema": {
+                            "$ref": "#/definitions/contant.FailedRes"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/contant.FailedRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/account/api/unauthorized/get_register_code/v1": {
+            "post": {
+                "description": "获取注册码",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "账户注册"
+                ],
+                "summary": "获取注册码",
+                "parameters": [
+                    {
+                        "description": "创建参数",
+                        "name": "create",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/http.GetRegisterCodeReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功",
+                        "schema": {
+                            "$ref": "#/definitions/contant.SuccessRes"
+                        }
+                    },
+                    "400": {
+                        "description": "参数解析错误",
+                        "schema": {
+                            "$ref": "#/definitions/contant.FailedRes"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/contant.FailedRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/account/api/unauthorized/get_register_info/v1": {
+            "post": {
+                "description": "查询注册状态信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "账户注册"
+                ],
+                "summary": "查询注册状态信息",
+                "parameters": [
+                    {
+                        "description": "创建参数",
+                        "name": "create",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/http.GetRegisterInfoReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功",
+                        "schema": {
+                            "$ref": "#/definitions/contant.SuccessRes"
+                        }
+                    },
+                    "400": {
+                        "description": "参数解析错误",
+                        "schema": {
+                            "$ref": "#/definitions/contant.FailedRes"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/contant.FailedRes"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "contant.FailedRes": {
+            "type": "object",
+            "required": [
+                "data",
+                "msg",
+                "success"
+            ],
+            "properties": {
+                "data": {
+                    "description": "返回的数据",
+                    "type": "object"
+                },
+                "msg": {
+                    "description": "请求结果的message",
+                    "type": "string",
+                    "example": "req_data_val_error"
+                },
+                "success": {
+                    "description": "请求结果，失败:false，成功:true",
+                    "type": "boolean",
+                    "example": false
+                }
+            }
+        },
+        "contant.SuccessRes": {
+            "type": "object",
+            "required": [
+                "data",
+                "msg",
+                "success"
+            ],
+            "properties": {
+                "data": {
+                    "description": "返回的数据",
+                    "type": "object"
+                },
+                "msg": {
+                    "description": "请求结果的message",
+                    "type": "string",
+                    "example": "ok"
+                },
+                "success": {
+                    "description": "请求结果，失败:false，成功:true",
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "http.GetRegisterCodeReq": {
+            "type": "object",
+            "required": [
+                "template_id"
+            ],
+            "properties": {
+                "template_id": {
+                    "description": "推广包的id 由业务方自主传入",
+                    "type": "string"
+                }
+            }
+        },
+        "http.GetRegisterInfoReq": {
+            "type": "object",
+            "required": [
+                "registerCode"
+            ],
+            "properties": {
+                "registerCode": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

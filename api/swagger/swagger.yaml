@@ -1,0 +1,180 @@
+basePath: /
+definitions:
+  contant.FailedRes:
+    properties:
+      data:
+        description: 返回的数据
+        type: object
+      msg:
+        description: 请求结果的message
+        example: req_data_val_error
+        type: string
+      success:
+        description: 请求结果，失败:false，成功:true
+        example: false
+        type: boolean
+    required:
+    - data
+    - msg
+    - success
+    type: object
+  contant.SuccessRes:
+    properties:
+      data:
+        description: 返回的数据
+        type: object
+      msg:
+        description: 请求结果的message
+        example: ok
+        type: string
+      success:
+        description: 请求结果，失败:false，成功:true
+        example: true
+        type: boolean
+    required:
+    - data
+    - msg
+    - success
+    type: object
+  http.GetRegisterCodeReq:
+    properties:
+      template_id:
+        description: 推广包的id 由业务方自主传入
+        type: string
+    required:
+    - template_id
+    type: object
+  http.GetRegisterInfoReq:
+    properties:
+      registerCode:
+        type: string
+    required:
+    - registerCode
+    type: object
+host: mk-dev.dustess.com
+info:
+  contact: {}
+  description: 示例服务
+  license: {}
+  title: 示例服务(mid-oauth2-srv)
+  version: "1.0"
+paths:
+  /account/api/basic/source/v1:
+    get:
+      consumes:
+      - application/json
+      description: 获取账户基础创建方式
+      parameters:
+      - description: 认证信息 eg:xxxx-xxxx-xxxx-xxx
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 修改成功
+          schema:
+            $ref: '#/definitions/contant.SuccessRes'
+        "400":
+          description: 参数解析错误
+          schema:
+            $ref: '#/definitions/contant.FailedRes'
+        "500":
+          description: 服务器内部错误
+          schema:
+            $ref: '#/definitions/contant.FailedRes'
+      summary: 获取账户基础创建方式
+      tags:
+      - 账户基础信息
+  /account/api/unauthorized/basic/source/v1:
+    get:
+      consumes:
+      - application/json
+      description: 获取账户基础创建方式-无auth
+      parameters:
+      - description: 公司corpId
+        in: query
+        name: corpId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 修改成功
+          schema:
+            $ref: '#/definitions/contant.SuccessRes'
+        "400":
+          description: 参数解析错误
+          schema:
+            $ref: '#/definitions/contant.FailedRes'
+        "500":
+          description: 服务器内部错误
+          schema:
+            $ref: '#/definitions/contant.FailedRes'
+      summary: 获取账户基础创建方式-无auth
+      tags:
+      - 账户基础信息
+  /account/api/unauthorized/get_register_code/v1:
+    post:
+      consumes:
+      - application/json
+      description: 获取注册码
+      parameters:
+      - description: 创建参数
+        in: body
+        name: create
+        required: true
+        schema:
+          $ref: '#/definitions/router.GetRegisterCodeReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 修改成功
+          schema:
+            $ref: '#/definitions/contant.SuccessRes'
+        "400":
+          description: 参数解析错误
+          schema:
+            $ref: '#/definitions/contant.FailedRes'
+        "500":
+          description: 服务器内部错误
+          schema:
+            $ref: '#/definitions/contant.FailedRes'
+      summary: 获取注册码
+      tags:
+      - 账户注册
+  /account/api/unauthorized/get_register_info/v1:
+    post:
+      consumes:
+      - application/json
+      description: 查询注册状态信息
+      parameters:
+      - description: 创建参数
+        in: body
+        name: create
+        required: true
+        schema:
+          $ref: '#/definitions/router.GetRegisterInfoReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 修改成功
+          schema:
+            $ref: '#/definitions/contant.SuccessRes'
+        "400":
+          description: 参数解析错误
+          schema:
+            $ref: '#/definitions/contant.FailedRes'
+        "500":
+          description: 服务器内部错误
+          schema:
+            $ref: '#/definitions/contant.FailedRes'
+      summary: 查询注册状态信息
+      tags:
+      - 账户注册
+swagger: "2.0"
